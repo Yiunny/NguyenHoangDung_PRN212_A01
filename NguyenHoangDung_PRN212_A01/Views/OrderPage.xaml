@@ -1,0 +1,50 @@
+﻿<Page x:Class="NguyenHoangDungWPF.Views.OrderPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:vm="clr-namespace:NguyenHoangDungWPF.ViewModels"
+      Title="OrderPage">
+
+    <Page.DataContext>
+        <vm:OrderViewModel />
+    </Page.DataContext>
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Row 0: nút tải -->
+            <RowDefinition Height="Auto"/>
+            <!-- Row 1: bảng đơn hàng -->
+            <RowDefinition Height="Auto"/>
+            <!-- Row 2: nhãn -->
+            <RowDefinition Height="*"/>
+            <!-- Row 3: bảng chi tiết -->
+        </Grid.RowDefinitions>
+
+        <!-- Nút tải đơn hàng -->
+        <Button Content="Tải đơn hàng" Command="{Binding LoadCommand}" Width="150" Margin="0,0,0,10" Grid.Row="0"/>
+
+        <!-- Bảng đơn hàng -->
+        <DataGrid Grid.Row="1" ItemsSource="{Binding Orders}" AutoGenerateColumns="False"
+                  SelectionChanged="OrderSelected" Height="200" Margin="0,10,0,10">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Order ID" Binding="{Binding OrderID}" Width="80"/>
+                <DataGridTextColumn Header="Customer ID" Binding="{Binding CustomerID}" Width="100"/>
+                <DataGridTextColumn Header="Employee ID" Binding="{Binding EmployeeID}" Width="100"/>
+                <DataGridTextColumn Header="Order Date" Binding="{Binding OrderDate}" Width="120"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Nhãn -->
+        <Label Content="Chi tiết đơn hàng (vui lòng ấn vào sản phẩm để xem thông tin)" FontWeight="Bold" Grid.Row="2" Margin="0,0,0,5"/>
+        <!-- Bảng chi tiết đơn hàng -->
+        <DataGrid Grid.Row="3" ItemsSource="{Binding Path=Details, Mode=OneWay}" AutoGenerateColumns="False" SelectionChanged="OrderSelected" Height="200">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Order ID" Binding="{Binding OrderID}" Width="100"/>
+                <DataGridTextColumn Header="Product ID" Binding="{Binding ProductID}" Width="100"/>
+                <DataGridTextColumn Header="Unit Price" Binding="{Binding UnitPrice, StringFormat=C}" Width="100"/>
+                <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" Width="100"/>
+                <DataGridTextColumn Header="Discount" Binding="{Binding Discount, StringFormat=P0}" Width="80"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>

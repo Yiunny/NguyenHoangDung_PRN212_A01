@@ -1,0 +1,113 @@
+﻿<Window x:Class="NguyenHoangDungWPF.Views.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:NguyenHoangDungWPF.ViewModels"
+        Title="Đăng nhập" Height="420" Width="450"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        WindowStyle="None">
+
+    <Window.DataContext>
+        <vm:LoginViewModel/>
+    </Window.DataContext>
+
+    <Grid>
+        <!-- Nền Gradient -->
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#74ebd5" Offset="0.0" />
+                <GradientStop Color="#ACB6E5" Offset="1.0" />
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <!-- Thẻ chính -->
+        <Border Margin="30"
+                Padding="20"
+                Background="White"
+                BorderBrush="#DDD" BorderThickness="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Tiêu đề -->
+                <TextBlock Text="Đăng nhập hệ thống"
+                           FontSize="22"
+                           FontWeight="Bold"
+                           Foreground="#333"
+                           HorizontalAlignment="Center" Margin="0,0,0,20"/>
+
+                <!-- Username -->
+                <StackPanel Grid.Row="1" Margin="0,5,0,0">
+                    <TextBlock Text="Tên đăng nhập:" FontWeight="SemiBold"/>
+                    <Border Background="#F0F0F0" BorderBrush="#CCC" BorderThickness="1" Margin="0,5,0,0">
+                        <TextBox Text="{Binding Username}" 
+                                 Background="Transparent" 
+                                 BorderThickness="0" Padding="5" FontSize="14"/>
+                    </Border>
+                </StackPanel>
+
+                <!-- Password -->
+                <StackPanel Grid.Row="2" Margin="0,10,0,0">
+                    <TextBlock Text="Mật khẩu:" FontWeight="SemiBold"/>
+                    <Grid Margin="0,5,0,0">
+                        <Border Background="#F0F0F0" BorderBrush="#CCC" BorderThickness="1">
+                            <PasswordBox x:Name="PasswordBox"
+                                         Background="Transparent"
+                                         BorderThickness="0"
+                                         Padding="5" Height="30"/>
+                        </Border>
+                        <Border Background="#F0F0F0" BorderBrush="#CCC" BorderThickness="1" Visibility="Collapsed">
+                            <TextBox x:Name="VisiblePasswordBox"
+                                     Background="Transparent"
+                                     BorderThickness="0"
+                                     Padding="5" Height="30"/>
+                        </Border>
+                        <Button x:Name="TogglePasswordButton" Content="👁"
+                                Width="30" Height="30"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Background="Transparent"
+                                BorderBrush="{x:Null}"
+                                Click="TogglePassword_Click"/>
+                    </Grid>
+                </StackPanel>
+
+                <!-- Nhớ tài khoản -->
+                <CheckBox x:Name="RememberMeCheckBox"
+                          Content="Nhớ tài khoản"
+                          Grid.Row="3" Margin="0,15,0,0"
+                          Foreground="#333"/>
+
+                <!-- Buttons -->
+                <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+                    <Button Content="Đăng nhập Nhân viên"
+                            Width="150" Height="35"
+                            Margin="10,0"
+                            Background="#74ebd5" Foreground="White"
+                            FontWeight="Bold" BorderBrush="#51c2b5"
+                            Click="LoginEmployee_Click"/>
+                    <Button Content="Đăng nhập Khách hàng"
+                            Width="150" Height="35"
+                            Margin="10,0"
+                            Background="#ACB6E5" Foreground="White"
+                            FontWeight="Bold" BorderBrush="#a0a6c0"
+                            Click="LoginCustomer_Click"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Nút đóng -->
+        <Button Content="✕"
+                Width="20" Height="22"
+                HorizontalAlignment="Right" VerticalAlignment="Top"
+                Margin="0,10,10,0"
+                Background="Transparent" Foreground="White"
+                FontSize="14" BorderBrush="{x:Null}"
+                Click="btnClose_Click" RenderTransformOrigin="0.956,0.025"/>
+    </Grid>
+</Window>
