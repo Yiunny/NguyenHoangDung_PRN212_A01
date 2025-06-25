@@ -43,7 +43,7 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ID" Binding="{Binding ProductID}" Width="50"/>
                     <DataGridTextColumn Header="Tên sản phẩm" Binding="{Binding ProductName}" Width="200"/>
-                    <DataGridTextColumn Header="Giá" Binding="{Binding UnitPrice}" Width="100"/>
+                    <DataGridTextColumn Header="Giá" Binding="{Binding UnitPrice, StringFormat=C}" Width="100"/>
                     <DataGridTextColumn Header="Còn trong kho" Binding="{Binding UnitsInStock}" Width="100"/>
                 </DataGrid.Columns>
             </DataGrid>
