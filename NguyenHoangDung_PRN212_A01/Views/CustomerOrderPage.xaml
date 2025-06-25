@@ -31,9 +31,9 @@
                   AutoGenerateColumns="False"
                   Height="200" Grid.Row="1">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding ProductID}" Width="50"/>
-                <DataGridTextColumn Header="Tên SP" Binding="{Binding ProductName}" Width="200"/>
-                <DataGridTextColumn Header="Giá" Binding="{Binding UnitPrice}" Width="100"/>
+                <DataGridTextColumn Header="ID Sản phẩm" Binding="{Binding ProductID}" Width="50"/>
+                <DataGridTextColumn Header="Tên Sản phẩm" Binding="{Binding ProductName}" Width="200"/>
+                <DataGridTextColumn Header="Giá" Binding="{Binding UnitPrice, StringFormat=C}" Width="100"/>
                 <DataGridTextColumn Header="Kho" Binding="{Binding UnitsInStock}" Width="100"/>
             </DataGrid.Columns>
         </DataGrid>
@@ -52,11 +52,11 @@
                   AutoGenerateColumns="False"
                   Height="200" Grid.Row="3">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ProductID" Binding="{Binding Product.ProductID}" Width="80"/>
-                <DataGridTextColumn Header="Tên SP" Binding="{Binding Product.ProductName}" Width="200"/>
-                <DataGridTextColumn Header="UnitPrice" Binding="{Binding Product.UnitPrice}" Width="100"/>
-                <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" Width="100"/>
-                <DataGridTextColumn Header="Total" Binding="{Binding Total}" Width="100"/>
+                <DataGridTextColumn Header="ID Sản phẩm" Binding="{Binding Product.ProductID}" Width="80"/>
+                <DataGridTextColumn Header="Tên Sản phẩm" Binding="{Binding Product.ProductName}" Width="200"/>
+                <DataGridTextColumn Header="Giá" Binding="{Binding Product.UnitPrice, StringFormat=C}" Width="100"/>
+                <DataGridTextColumn Header="Số lượng" Binding="{Binding Quantity}" Width="100"/>
+                <DataGridTextColumn Header="Tổng" Binding="{Binding Total, StringFormat=C}" Width="100"/>
             </DataGrid.Columns>
         </DataGrid>
 

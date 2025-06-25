@@ -3,7 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:views="clr-namespace:NguyenHoangDungWPF.Views"
         Title="Sales Management System" Height="500" Width="800"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Background="White">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -11,38 +13,66 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <!-- Đây là Sidebar bên trái -->
-        <TextBlock x:Name="WelcomeText"
-           FontSize="16"
-           Foreground="White"
-           FontWeight="Bold"
-           Margin="0 0 0 20"/>
+        <!-- Sidebar -->
+        <Grid Grid.Column="0" Background="#2D2D30">
+            <StackPanel x:Name="Sidebar" Margin="10,10,10,10">
+                <!-- Welcome -->
+                <TextBlock x:Name="WelcomeText"
+                           FontSize="16"
+                           Foreground="White"
+                           FontWeight="Bold"
+                           Margin="0,0,0,20"/>
 
-        <StackPanel x:Name="Sidebar" Grid.Column="0" Background="#2D2D30" Margin="0">
-            <TextBlock Text="Danh mục" Foreground="White" FontWeight="Bold" FontSize="16" Margin="0 0 0 20"/>
+                <!-- Danh mục -->
+                <TextBlock Text="Danh mục"
+                           FontSize="16" FontWeight="Bold"
+                           Foreground="White" Margin="0,0,0,20"/>
 
-            <!-- Dành cho nhân viên -->
-            <StackPanel x:Name="EmployeeMenu">
-                <Button Content="Khách hàng" Click="Navigate_Customer" Margin="0,0,0,10"/>
-                <Button Content="Sản phẩm" Click="Navigate_Product" Margin="0,0,0,10"/>
-                <Button Content="Đơn hàng" Click="Navigate_Order" Margin="0,0,0,10"/>
-                <Button Content="Thống kê" Click="Navigate_Report" Margin="0,0,0,10"/>
+                <!-- Nhân viên -->
+                <StackPanel x:Name="EmployeeMenu">
+                    <Button Content="Khách hàng" Click="Navigate_Customer" Margin="0,0,0,10" Height="35"
+                            Background="#3E3E42" Foreground="White" BorderBrush="#555"/>
+                    <Button Content="Sản phẩm" Click="Navigate_Product" Margin="0,0,0,10" Height="35"
+                            Background="#3E3E42" Foreground="White" BorderBrush="#555"/>
+                    <Button Content="Đơn hàng" Click="Navigate_Order" Margin="0,0,0,10" Height="35"
+                            Background="#3E3E42" Foreground="White" BorderBrush="#555"/>
+                    <Button Content="Thống kê" Click="Navigate_Report" Margin="0,0,0,10" Height="35"
+                            Background="#3E3E42" Foreground="White" BorderBrush="#555"/>
+                </StackPanel>
+
+                <!-- Khách hàng -->
+                <StackPanel x:Name="CustomerMenu">
+                    <Button Content="Hồ sơ cá nhân" Click="Navigate_Profile" Margin="0,0,0,10" Height="35"
+                            Background="#3E3E42" Foreground="White" BorderBrush="#555"/>
+                    <Button Content="Đặt hàng" Click="OrderPage_Click" Margin="0,0,0,10" Height="35"
+                            Background="#3E3E42" Foreground="White" BorderBrush="#555"/>
+                    <Button Content="Lịch sử đặt hàng" Click="ViewHistory_Click" Margin="0,0,0,10" Height="35"
+                            Background="#3E3E42" Foreground="White" BorderBrush="#555"/>
+                </StackPanel>
+
+                <!-- Đăng xuất -->
+                <Button Content="Đăng xuất" Click="Logout_Click" Margin="0,20,0,0" Height="35"
+                        Background="Transparent" Foreground="#FF4C4C" FontWeight="Bold"
+                        BorderBrush="Transparent"/>
             </StackPanel>
+        </Grid>
 
-            <!-- Dành cho khách hàng -->
-            
-            <StackPanel x:Name="CustomerMenu" Height="90">
-                <Button Content="Hồ sơ cá nhân" Click="Navigate_Profile" Margin="0,0,0,10"/>
-                <Button Content="Đặt hàng" Click="OrderPage_Click" Margin="0,0,0,10"/>
-                <Button Content="Lịch sử đặt hàng" Click="ViewHistory_Click"/>
-            </StackPanel>
+        <!-- Content area with gradient background -->
+        <Grid Grid.Column="1">
+            <!-- Gradient background -->
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#fdfbfb" Offset="0"/>
+                    <GradientStop Color="#ebedee" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
 
-            <Button Content="Đăng xuất" Click="Logout_Click" Margin="0,20,0,0" Foreground="Red"/>
-        </StackPanel>
-
-
-
-        <!-- Content area -->
-        <Frame x:Name="MainFrame" Grid.Column="1" NavigationUIVisibility="Hidden"/>
+            <!-- Frame content -->
+            <Border Margin="10" Background="White" BorderBrush="#DDD" BorderThickness="1">
+                <Frame x:Name="MainFrame"
+                       NavigationUIVisibility="Hidden"
+                       Background="White"/>
+            </Border>
+        </Grid>
     </Grid>
 </Window>
