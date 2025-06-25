@@ -64,8 +64,8 @@
                      PasswordChanged="PasswordBox_PasswordChanged"
                      Visibility="Visible"/>
                             <TextBox x:Name="VisiblePasswordBox"
-                 Background="Transparent"
-                 BorderThickness="0"
+                 Background="#F0F0F0"
+                 BorderThickness="1"
                  Padding="5" Height="30"
                  Visibility="Collapsed"
                  TextChanged="VisiblePasswordBox_TextChanged"/>
@@ -80,9 +80,18 @@
             BorderBrush="{x:Null}"
             Click="TogglePassword_Click"/>
                     </Grid>
-
+                    <TextBlock Text="©Copyright by Dung_SE194760"
+                           FontSize="9"
+                           FontWeight="Light"
+                           Foreground="#333"
+                           HorizontalAlignment="Center" Margin="0,0,0,20"/>
+                    <TextBlock Text="25/6/2025"
+                          FontSize="9"
+                          FontWeight="Light"
+                          Foreground="#333"
+                          HorizontalAlignment="Center" Margin="0,0,0,20"/>
                 </StackPanel>
-
+                
                 <!-- Buttons -->
                 <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
                     <Button Content="Đăng nhập Nhân viên"
@@ -98,6 +107,7 @@
                             FontWeight="Bold" BorderBrush="#a0a6c0"
                             Click="LoginCustomer_Click"/>
                 </StackPanel>
+                
             </Grid>
         </Border>
 
