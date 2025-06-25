@@ -11,7 +11,7 @@
     <Grid Margin="20">
         <StackPanel>
             <Button Content="Tải sản phẩm" Command="{Binding LoadCommand}" Width="150" Margin="0,0,0,10"/>
-            <DataGrid ItemsSource="{Binding Products}" AutoGenerateColumns="False" Height="300">
+            <DataGrid x:Name="ProductGrid" ItemsSource="{Binding Products}" AutoGenerateColumns="False" Height="300">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ID" Binding="{Binding ProductID}" Width="50"/>
                     <DataGridTextColumn Header="Tên sản phẩm" Binding="{Binding ProductName}" Width="200"/>
@@ -19,6 +19,11 @@
                     <DataGridTextColumn Header="Còn trong kho" Binding="{Binding UnitsInStock}" Width="100"/>
                 </DataGrid.Columns>
             </DataGrid>
+            <StackPanel Orientation="Horizontal" Margin="132,10,132,0">
+                <Button Content="Thêm" Width="80" Command="{Binding AddCommand}" Margin="0,0,10,0" />
+                <Button Content="Sửa" Width="80" Command="{Binding EditCommand}" CommandParameter="{Binding SelectedItem, ElementName=ProductGrid}" Margin="0,0,10,0" />
+                <Button Content="Xoá" Width="85" Command="{Binding DeleteCommand}" CommandParameter="{Binding SelectedItem, ElementName=ProductGrid}" />
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Page>

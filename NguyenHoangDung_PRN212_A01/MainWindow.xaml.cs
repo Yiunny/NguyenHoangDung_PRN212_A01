@@ -80,6 +80,14 @@ namespace NguyenHoangDungWPF
             login.Show();
             this.Close();
         }
+        private void OrderPage_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new CustomerOrderPage());
+        }
+        private void ViewHistory_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new CustomerOrderHistoryPage());
+        }
 
 
     }

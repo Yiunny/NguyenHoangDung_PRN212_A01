@@ -1,4 +1,5 @@
 ﻿using BusinessObjects;
+using DataAccessLayer;
 using NguyenHoangDungWPF.Commands;
 using NguyenHoangDungWPF.Utils;
 using Services;
@@ -8,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace NguyenHoangDungWPF.ViewModels
@@ -47,13 +49,24 @@ namespace NguyenHoangDungWPF.ViewModels
 
         private void PlaceOrder()
         {
-            if (SessionManager.CurrentCustomer == null) return;
+            if (SessionManager.CurrentCustomer == null)
+            {
+                MessageBox.Show("Bạn cần đăng nhập để đặt hàng!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (!Cart.Any())
+            {
+                MessageBox.Show("Giỏ hàng trống!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
 
             var newOrder = new Order
             {
                 CustomerID = SessionManager.CurrentCustomer.CustomerID,
                 OrderDate = DateTime.Now,
-                EmployeeID = 0, // không có nhân viên nào liên quan ở đây
+                EmployeeID = new LucySalesDbContext().Employees.Select(e => e.EmployeeID).FirstOrDefault(),
+
                 OrderDetails = Cart.Select(item => new OrderDetail
                 {
                     ProductID = item.Product.ProductID,
@@ -65,6 +78,8 @@ namespace NguyenHoangDungWPF.ViewModels
 
             _orderService.Add(newOrder);
             ClearCart();
+
+            MessageBox.Show("Đặt hàng thành công!", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }

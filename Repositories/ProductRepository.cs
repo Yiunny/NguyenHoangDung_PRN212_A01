@@ -55,19 +55,34 @@ namespace Repositories
 
         public void Update(Product product)
         {
-            _context.Products.Update(product);
-            _context.SaveChanges();
+            var existing = _context.Products.FirstOrDefault(p => p.ProductID == product.ProductID);
+            if (existing != null)
+            {
+                existing.ProductName = product.ProductName;
+                existing.UnitPrice = product.UnitPrice;
+                existing.UnitsInStock = product.UnitsInStock;
+                _context.SaveChanges();
+            }
         }
+
 
         public void Delete(int id)
         {
             var product = GetById(id);
-            if (product != null)
+            if (product == null) return;
+
+            // Kiểm tra sản phẩm đã được đặt hàng chưa
+            bool isReferenced = _context.OrderDetails.Any(od => od.ProductID == id);
+            if (isReferenced)
             {
-                _context.Products.Remove(product);
-                _context.SaveChanges();
+                throw new InvalidOperationException("Không thể xóa sản phẩm vì đã tồn tại trong đơn hàng.");
             }
+
+            _context.Products.Remove(product);
+            _context.SaveChanges();
         }
+
+
 
     }
 }

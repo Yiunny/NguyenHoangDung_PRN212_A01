@@ -27,10 +27,10 @@
         <DataGrid Grid.Row="1" ItemsSource="{Binding Orders}" AutoGenerateColumns="False"
                   SelectionChanged="OrderSelected" Height="200" Margin="0,10,0,10">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Order ID" Binding="{Binding OrderID}" Width="80"/>
-                <DataGridTextColumn Header="Customer ID" Binding="{Binding CustomerID}" Width="100"/>
-                <DataGridTextColumn Header="Employee ID" Binding="{Binding EmployeeID}" Width="100"/>
-                <DataGridTextColumn Header="Order Date" Binding="{Binding OrderDate}" Width="120"/>
+                <DataGridTextColumn Header="ID Đơn hàng" Binding="{Binding OrderID}" Width="80"/>
+                <DataGridTextColumn Header="ID Khách hàng" Binding="{Binding CustomerID}" Width="100"/>
+                <DataGridTextColumn Header="ID Nhân viên" Binding="{Binding EmployeeID}" Width="100"/>
+                <DataGridTextColumn Header="Ngày đặt hàng" Binding="{Binding OrderDate}" Width="120"/>
             </DataGrid.Columns>
         </DataGrid>
 
@@ -39,11 +39,11 @@
         <!-- Bảng chi tiết đơn hàng -->
         <DataGrid Grid.Row="3" ItemsSource="{Binding Path=Details, Mode=OneWay}" AutoGenerateColumns="False" SelectionChanged="OrderSelected" Height="200">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Order ID" Binding="{Binding OrderID}" Width="100"/>
-                <DataGridTextColumn Header="Product ID" Binding="{Binding ProductID}" Width="100"/>
-                <DataGridTextColumn Header="Unit Price" Binding="{Binding UnitPrice, StringFormat=C}" Width="100"/>
-                <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" Width="100"/>
-                <DataGridTextColumn Header="Discount" Binding="{Binding Discount, StringFormat=P0}" Width="80"/>
+                <DataGridTextColumn Header="ID Đơn hàng" Binding="{Binding OrderID}" Width="100"/>
+                <DataGridTextColumn Header="ID Sản phẩm" Binding="{Binding ProductID}" Width="100"/>
+                <DataGridTextColumn Header="Giá" Binding="{Binding UnitPrice, StringFormat=C}" Width="100"/>
+                <DataGridTextColumn Header="Số lượng" Binding="{Binding Quantity}" Width="100"/>
+                <DataGridTextColumn Header="Săn sale" Binding="{Binding Discount, StringFormat=P0}" Width="80"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

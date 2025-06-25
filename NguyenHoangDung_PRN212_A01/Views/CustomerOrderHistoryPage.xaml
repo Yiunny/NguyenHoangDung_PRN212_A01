@@ -1,0 +1,40 @@
+﻿<Page x:Class="NguyenHoangDungWPF.Views.CustomerOrderHistoryPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:vm="clr-namespace:NguyenHoangDungWPF.ViewModels"
+      Title="Lịch sử đặt hàng">
+
+    <Page.DataContext>
+        <vm:CustomerOrderHistoryViewModel />
+    </Page.DataContext>
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="200"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Lịch sử đơn hàng (Ấn vào 1 sản phẩm để xem chi tiết)" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
+
+        <DataGrid Grid.Row="1" ItemsSource="{Binding Orders}" SelectedItem="{Binding SelectedOrder}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID Đơn hàng" Binding="{Binding OrderID}" Width="100"/>
+                <DataGridTextColumn Header="Ngày" Binding="{Binding OrderDate}" Width="150"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button Grid.Row="2" Content="Hủy đơn hàng" Command="{Binding CancelOrderCommand}" Width="150" Margin="0,10"/>
+
+        <DataGrid Grid.Row="3" ItemsSource="{Binding Details}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Tên sản phẩm" Binding="{Binding ProductName}" Width="200"/>
+                <DataGridTextColumn Header="Giá" Binding="{Binding UnitPrice, StringFormat=C}" Width="100"/>
+                <DataGridTextColumn Header="Số lượng" Binding="{Binding Quantity}" Width="100"/>
+                <DataGridTextColumn Header="Săn sale" Binding="{Binding Discount, StringFormat=P0}" Width="100"/>
+                <DataGridTextColumn Header="Tổng cộng" Binding="{Binding Total, StringFormat=C}" Width="100"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>

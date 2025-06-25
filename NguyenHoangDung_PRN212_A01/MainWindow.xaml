@@ -31,8 +31,10 @@
 
             <!-- Dành cho khách hàng -->
             
-            <StackPanel x:Name="CustomerMenu">
+            <StackPanel x:Name="CustomerMenu" Height="90">
                 <Button Content="Hồ sơ cá nhân" Click="Navigate_Profile" Margin="0,0,0,10"/>
+                <Button Content="Đặt hàng" Click="OrderPage_Click" Margin="0,0,0,10"/>
+                <Button Content="Lịch sử đặt hàng" Click="ViewHistory_Click"/>
             </StackPanel>
 
             <Button Content="Đăng xuất" Click="Logout_Click" Margin="0,20,0,0" Foreground="Red"/>

@@ -32,10 +32,10 @@ namespace NguyenHoangDungWPF.ViewModels
         }
         public ICommand AddToCartCommand { get; }
 
-        public CustomerOrderViewModel(ICommand addToCartCommand)
+        public CustomerOrderViewModel()
         {
             AddToCartCommand = new RelayCommand(_ => AddToCartExecute(), _ => SelectedProduct != null && QuantityToAdd > 0);
-
+            Categories = new ObservableCollection<Category>(_categoryService.GetAll());
         }
 
         private Category? _selectedCategory;
@@ -51,11 +51,6 @@ namespace NguyenHoangDungWPF.ViewModels
         }
 
         public ShoppingCartViewModel CartViewModel { get; set; } = new();
-
-        public CustomerOrderViewModel()
-        {
-            Categories = new ObservableCollection<Category>(_categoryService.GetAll());
-        }
 
         public void LoadProducts()
         {

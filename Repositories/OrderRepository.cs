@@ -1,10 +1,11 @@
-﻿using System;
+﻿using BusinessObjects;
+using DataAccessLayer;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BusinessObjects;
-using DataAccessLayer;
 
 namespace Repositories
 {
@@ -30,19 +31,26 @@ namespace Repositories
             }
         }
 
-        public IEnumerable<Order> GetAll() => _context.Orders
-            .OrderByDescending(o => o.OrderDate)
-            .ToList();
+        public IEnumerable<Order> GetAll() =>
+            _context.Orders
+                .Include(o => o.Customer)
+                .Include(o => o.Employee)
+                .OrderByDescending(o => o.OrderDate)
+                .ToList();
 
-        public IEnumerable<Order> GetByDateRange(DateTime start, DateTime end) => _context.Orders
-            .Where(o => o.OrderDate >= start && o.OrderDate <= end)
-            .OrderByDescending(o => o.OrderDate)
-            .ToList();
+        public IEnumerable<Order> GetByDateRange(DateTime start, DateTime end) =>
+            _context.Orders
+                .Include(o => o.Customer)
+                .Include(o => o.Employee)
+                .Where(o => o.OrderDate >= start && o.OrderDate <= end)
+                .OrderByDescending(o => o.OrderDate)
+                .ToList();
 
         public Order? GetById(int id) => _context.Orders.FirstOrDefault(o => o.OrderID == id);
 
         public void Add(Order order)
         {
+
             _context.Orders.Add(order);
             _context.SaveChanges();
         }
@@ -58,9 +66,15 @@ namespace Repositories
             var order = GetById(id);
             if (order != null)
             {
+                // Xóa toàn bộ OrderDetail của order trước
+                var details = _context.OrderDetails.Where(od => od.OrderID == id).ToList();
+                _context.OrderDetails.RemoveRange(details);
+
+                // Sau đó mới xóa order
                 _context.Orders.Remove(order);
                 _context.SaveChanges();
             }
         }
+
     }
 }

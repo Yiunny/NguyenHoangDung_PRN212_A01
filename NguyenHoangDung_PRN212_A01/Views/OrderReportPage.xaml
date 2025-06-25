@@ -19,7 +19,7 @@
 
         <DataGrid ItemsSource="{Binding Orders}" AutoGenerateColumns="False" Height="200">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="OrderID" Binding="{Binding OrderID}" Width="80"/>
+                <DataGridTextColumn Header="ID Đơn hàng" Binding="{Binding OrderID}" Width="80"/>
                 <DataGridTextColumn Header="Ngày" Binding="{Binding OrderDate}" Width="120"/>
                 <DataGridTextColumn Header="Khách hàng" Binding="{Binding Customer.CompanyName}" Width="200"/>
                 <DataGridTextColumn Header="Nhân viên" Binding="{Binding Employee.Name}" Width="150"/>

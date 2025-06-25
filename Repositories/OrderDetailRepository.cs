@@ -1,10 +1,11 @@
-﻿using System;
+﻿using BusinessObjects;
+using DataAccessLayer;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BusinessObjects;
-using DataAccessLayer;
 
 namespace Repositories
 {
@@ -31,8 +32,14 @@ namespace Repositories
             }
         }
 
-        public IEnumerable<OrderDetail> GetByOrderId(int orderId) =>
-            _context.OrderDetails.Where(od => od.OrderID == orderId).ToList();
+        public IEnumerable<OrderDetail> GetByOrderId(int orderId)
+        {
+            return _context.OrderDetails
+                .Include(od => od.Product) 
+                .Where(od => od.OrderID == orderId)
+                .ToList();
+        }
+
 
         public void Add(OrderDetail detail)
         {

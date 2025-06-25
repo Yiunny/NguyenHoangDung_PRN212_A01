@@ -25,16 +25,6 @@ namespace NguyenHoangDungWPF.Views
         public LoginWindow()
         {
             InitializeComponent();
-            var vm = new LoginViewModel
-            {
-                Username = Settings.Default.SavedUsername,
-                Password = Settings.Default.SavedPassword
-            };
-
-            PasswordBox.Password = vm.Password;
-            VisiblePasswordBox.Text = vm.Password;
-
-            DataContext = vm;
         }
         public void Login_Click(object sender, RoutedEventArgs e)
         {
@@ -106,26 +96,27 @@ namespace NguyenHoangDungWPF.Views
                 VisiblePasswordBox.Visibility = Visibility.Collapsed;
             }
         }
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (VisiblePasswordBox.Visibility == Visibility.Visible)
+            {
+                VisiblePasswordBox.Text = PasswordBox.Password;
+            }
+        }
+
+        private void VisiblePasswordBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (PasswordBox.Visibility == Visibility.Visible)
+            {
+                PasswordBox.Password = VisiblePasswordBox.Text;
+            }
+        }
+
         private string GetCurrentPassword()
         {
             return PasswordBox.Visibility == Visibility.Visible
                 ? PasswordBox.Password
                 : VisiblePasswordBox.Text;
-        }
-        private void SaveCredentials()
-        {
-            if (RememberMeCheckBox.IsChecked == true)
-            {
-                Settings.Default.SavedUsername = ((LoginViewModel)DataContext).Username;
-                Settings.Default.SavedPassword = GetCurrentPassword();
-            }
-            else
-            {
-                Settings.Default.SavedUsername = "";
-                Settings.Default.SavedPassword = "";
-            }
-
-            Settings.Default.Save();
         }
 
 
